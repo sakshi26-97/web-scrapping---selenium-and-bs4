@@ -1,0 +1,16 @@
+   
+    for link in soup.findAll('a'):
+        url = link.get('href')
+        text = " ".join(re.findall("[a-zA-Z]+", link.getText()))
+        if url not in blacklist:
+            if not url.startswith('https'):
+                url = 'https://tempolearning.brightspace.com'+url
+
+                if url not in url_list:
+                    url_list.append(url)
+                    text_list.append(json.dumps(text)[1:len(json.dumps(text))-1])
+    
+    url_dictionary['home'] = url_list
+    text_dictionary['home'] = text_list
+    url_dict_copy['home'] = url_list
+    text_dict_copy['home'] = text_list
